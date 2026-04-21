@@ -1,8 +1,24 @@
-import express from "express"
+// import express from "express"
+// const app = express();
+// import authRouter from "./routes/auth.routes.js"
+
+// app.use(express.json());
+// app.use("/api/auth", authRouter);
+
+// export {app};
+
+import express from "express";
+import cors from "cors";
+import routes from "./routes/index.js";
+import errorMiddleware from "./middleware/error.middleware.js";
+
 const app = express();
-import authRouter from "./routes/auth.routes.js"
 
+app.use(cors());
 app.use(express.json());
-app.use("/api/auth", authRouter);
 
-export {app};
+app.use("/api", routes);
+
+app.use(errorMiddleware);
+
+export default app;
